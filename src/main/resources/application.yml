@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/aussie_ogame  # sets the URL for the database connection
-    username: root                                  # sets the username for the database connection
-    password: Gg7771999                             # sets the password for the database connection
+    username: ${DB_USERNAME:}                                  # sets the username for the database connection
+    password: ${DB_PASSWORD:}                             # sets the password for the database connection
   jpa:
     hibernate:
       ddl-auto: update                               # automatically updates the schema of the database
