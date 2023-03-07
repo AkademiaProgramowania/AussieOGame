@@ -25,7 +25,7 @@
 		<java.version>17</java.version>
 	</properties>
 
-	<!-- Dependencies - Sorted alphabetically for better readability.-->
+	<!-- Dependencies -->
 	<dependencies>
 		<!-- Spring Boot Web Starter -->
 		<dependency>
