@@ -1,10 +1,9 @@
 package com.aussieogame.backend.model.dao.impl;
 
 import com.aussieogame.backend.model.dao.Basic;
+import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
-import javax.persistence.Entity;
 
 @Entity
 @SuperBuilder

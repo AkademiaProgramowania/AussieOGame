@@ -2,10 +2,10 @@ package com.aussieogame.backend.model.dao.impl;
 
 import com.aussieogame.backend.model.dao.Basic;
 import com.aussieogame.backend.model.dao.enumeration.Region;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity

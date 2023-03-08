@@ -2,10 +2,13 @@ package com.aussieogame.backend.model.dao.impl;
 
 import com.aussieogame.backend.model.dao.Basic;
 import com.aussieogame.backend.model.dao.enumeration.Race;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.util.Set;
 
 @Entity

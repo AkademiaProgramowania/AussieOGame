@@ -1,10 +1,11 @@
 package com.aussieogame.backend.model.dao;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass

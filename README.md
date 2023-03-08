@@ -3,8 +3,6 @@ The backend of a clone of the OGame. Instead of humans in space, there are platy
 
 # Important before running app
 1. Before running go to application.yml and set URL, username and password needed for the SQl database connection or set enviroment variables
-2. <artifactId>spring-boot-maven-plugin</artifactId> in pom.xml gives error "Plugin 'org.springframework.boot:spring-boot-maven-plugin:' not found"
-   but this does not affect the program and you can safely run it with it.
 
 # Plans for future
 1. Make a more complicated resource system and expand trade between players. Colonies would have, for example,

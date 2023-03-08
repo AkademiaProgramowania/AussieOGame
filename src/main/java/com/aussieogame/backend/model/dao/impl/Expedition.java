@@ -1,11 +1,11 @@
 package com.aussieogame.backend.model.dao.impl;
 
 import com.aussieogame.backend.model.dao.Basic;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
