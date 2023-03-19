@@ -39,7 +39,7 @@ public class SecurityFilterConfig {
 
         OAuth2TokenValidator<Jwt> validatorWithIssuer = JwtValidators.createDefaultWithIssuer(issuerUri);
         DelegatingOAuth2TokenValidator<Jwt> tokenValidator =
-                new DelegatingOAuth2TokenValidator<>(validatorWithIssuer, this::audienceValidator);
+                new DelegatingOAuth2TokenValidator<>(validatorWithIssuer, this::validateAudience);
 
         NimbusJwtDecoder decoder = JwtDecoders.fromIssuerLocation(issuerUri);
         decoder.setJwtValidator(tokenValidator);
@@ -47,7 +47,7 @@ public class SecurityFilterConfig {
         return decoder;
     }
 
-    private OAuth2TokenValidatorResult audienceValidator(Jwt jwt) {
+    private OAuth2TokenValidatorResult validateAudience(Jwt jwt) {
         if (jwt.getAudience().contains(appProperties.getAudience())) {
             return OAuth2TokenValidatorResult.success();
         }
