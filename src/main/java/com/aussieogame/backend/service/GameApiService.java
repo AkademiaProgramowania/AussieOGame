@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GameApiService {
     public ApiOkResponse getProtectedResource() {
-        String somethingProtected = "this should only be available to authenticated users";
+        String somethingProtected = "this is available to authenticated users";
 
         return ApiOkResponse.from(somethingProtected);
     }

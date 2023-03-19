@@ -30,10 +30,10 @@ public class WebErrorHandler {
     }
 
     private ApiErrorResponse handleException(Exception exception) {
-        String errorMsg = "500 INTERNAL SERVER ERROR" +
-                "\n\tException: " +
+        String errorMsg = "500 INTERNAL SERVER ERROR. " +
+                "Exception: " +
                 exception.getClass() +
-                "\n\tMessage:   " +
+                " Message:   " +
                 exception.getMessage();
 
         return handleException(errorMsg);
