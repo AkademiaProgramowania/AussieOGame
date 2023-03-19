@@ -1,9 +1,3 @@
-# Local environment profile
-spring:
-  profiles:
-    active: dev
-
-# JPA Logging
 logging:
   level:
     org:
