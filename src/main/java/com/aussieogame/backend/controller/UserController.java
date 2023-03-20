@@ -2,6 +2,8 @@ package com.aussieogame.backend.controller;
 
 import com.aussieogame.backend.dto.ApiOkResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,4 +30,3 @@ public class UserController {
         return ApiOkResponse.from(claims.toString());
     }
 }
-

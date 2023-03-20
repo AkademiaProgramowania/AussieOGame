@@ -2,7 +2,7 @@
 The backend of a clone of the OGame. Instead of humans in space, there are platypuses in Australia.
 
 # Important before running app
-1. Before running go to application.yml and set URL, username and password needed for the SQl database connection or set enviroment variables
+1. See TEMPLATE.yml for instructions on how to set environment variables
 
 # Plans for future
 1. Make a more complicated resource system and expand trade between players. Colonies would have, for example,

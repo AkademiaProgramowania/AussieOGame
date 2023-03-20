@@ -22,13 +22,14 @@ public class SecurityFilterConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/protected", "/api/v1/user")
+                        .requestMatchers("/api/v1/protected", "/api/v1/user", "/api/v1/towns")
                             .authenticated()
                         .anyRequest()
                             .permitAll())
                 .oauth2ResourceServer(server -> server.authenticationEntryPoint(authenticationErrorHandler)
                         .jwt(jwt -> jwt.decoder(createJwtDecoder())
-                                .jwtAuthenticationConverter(createAuthenticationConverter())))
+                                .jwtAuthenticationConverter(createAuthenticationConverter()))
+                )
                 .cors();
 
         return http.build();

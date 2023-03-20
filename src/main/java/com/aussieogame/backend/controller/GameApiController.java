@@ -3,6 +3,7 @@ package com.aussieogame.backend.controller;
 import com.aussieogame.backend.dto.ApiOkResponse;
 import com.aussieogame.backend.service.GameApiService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,10 @@ public class GameApiController {
     @GetMapping("/public")
     public ApiOkResponse getPublic() {
         return api.getPublicResource();
+    }
+
+    @GetMapping("/towns")
+    public ApiOkResponse getTowns(JwtAuthenticationToken principal) {
+        return api.getTowns(principal);
     }
 }
