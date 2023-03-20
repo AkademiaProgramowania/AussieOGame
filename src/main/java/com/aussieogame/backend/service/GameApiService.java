@@ -33,7 +33,7 @@ public class GameApiService {
 
         String response = towns.stream()
                 .map(Town::toString)
-                .collect(Collectors.joining("  ##  "));
+                .collect(Collectors.joining("  ---  "));
         return ApiOkResponse.from(response);
     }
 }
