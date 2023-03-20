@@ -1,0 +1,6 @@
+logging:
+  level:
+    org:
+      springframework:
+        orm.jpa: TRACE                               # sets the log level for the ORM module of Spring Framework to TRACE, allowing for detailed logging of JPA queries and transactions.
+
