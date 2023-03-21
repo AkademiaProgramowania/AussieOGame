@@ -18,13 +18,13 @@ import java.util.Collections;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisteredUser extends Basic implements UserDetails {
-    @Column(unique = true)
+public class Registration extends Basic implements UserDetails {
+    @Column(unique = true, nullable = false)
     private String username; //used in Spring Security
 
     private String displayName; //"username" is semi-reserved by Spring Security to mean a unique Principal id
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL) //define fetch type
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @Override

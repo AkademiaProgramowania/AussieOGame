@@ -28,4 +28,7 @@ public class User extends Basic {
     private Set<Town> towns;
     @Enumerated(EnumType.STRING)
     private Race race;
+
+    @OneToOne(mappedBy = "user")
+    private Registration registration;
 }

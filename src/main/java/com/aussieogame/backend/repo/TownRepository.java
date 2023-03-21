@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TownRepository extends JpaRepository<Town, Long> {
-    List<Town> findAllByUser_Username(String jwtSubjectClaim);
+    List<Town> findAllByUserRegistrationUsername(String jwtSubjectClaim);
 }

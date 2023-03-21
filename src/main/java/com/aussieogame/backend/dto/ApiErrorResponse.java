@@ -4,7 +4,7 @@ import lombok.Value;
 import org.springframework.lang.NonNull;
 
 @Value
-public class ApiErrorResponse {
+public class ApiErrorResponse implements ApiResponse {
     String error;
 
     public static ApiErrorResponse from(@NonNull String error) {
