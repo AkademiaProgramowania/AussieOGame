@@ -37,7 +37,6 @@ public class UserController {
 
     @PostMapping
     public ApiResponse postPlayerDisplayName(@RequestParam("name") String name, JwtAuthenticationToken principal) {
-        System.out.println(name);
         return api.assignNameToUser(name, principal);
     }
 }

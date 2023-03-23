@@ -64,7 +64,6 @@ public class GameApiService {
 
         User newUser = new User(0L, new HashSet<>(), Race.PLATYPUS, null);
         Registration newRegistration = new Registration(subject, newName, newUser);
-        newUser.setRegistration(newRegistration);
 
         registrationRepo.save(newRegistration);
         return new ApiOkResponse("Created.");

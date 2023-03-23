@@ -17,16 +17,23 @@ import java.util.Collections;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Registration extends Basic implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username; //used in Spring Security
 
     private String displayName; //"username" is semi-reserved by Spring Security to mean a unique Principal id
 
-    @OneToOne(cascade = CascadeType.ALL) //define fetch type
+    @OneToOne(cascade = CascadeType.ALL) //TODO define fetch type
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public Registration(String username, String displayName, User user) {
+        this.username = username;
+        this.displayName = displayName;
+        user.setRegistration(this);
+        this.user = user;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // TODO Authorities should be extracted from JWT in a filter
