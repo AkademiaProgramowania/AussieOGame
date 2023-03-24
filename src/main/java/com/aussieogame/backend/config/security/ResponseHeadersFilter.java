@@ -1,4 +1,4 @@
-package com.aussieogame.backend.config;
+package com.aussieogame.backend.config.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;

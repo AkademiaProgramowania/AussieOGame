@@ -1,5 +1,6 @@
-package com.aussieogame.backend.config;
+package com.aussieogame.backend.config.security;
 
+import com.aussieogame.backend.config.AppProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -14,14 +15,16 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.Arrays;
-
 @Configuration
 @RequiredArgsConstructor
 public class SecurityFilterConfig {
     private final AuthenticationErrorHandler authenticationErrorHandler;
-    private final OAuth2ResourceServerProperties oauth2Properties; //oauth2 config (extracted from application.yml)
-    private final AppProperties appProperties; //custom config properties
+
+    //oauth2 config (extracted from application.yml)
+    private final OAuth2ResourceServerProperties oauth2Properties;
+
+    //custom config properties
+    private final AppProperties appProperties;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -42,12 +45,13 @@ public class SecurityFilterConfig {
                 );
     }
 
-    private Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> configureRequestMatchers() {
+    private Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>
+    configureRequestMatchers() {
         return auth -> auth
-                .requestMatchers(getProtectedEndpoints())
-                .authenticated()
+                .requestMatchers(appProperties.getProtectedEndpointUrls())
+                    .authenticated()
                 .anyRequest()
-                .permitAll();
+                    .permitAll();
     }
 
     private JwtDecoder createJwtDecoder() {
@@ -117,15 +121,5 @@ public class SecurityFilterConfig {
         authoritiesConverter.setAuthorityPrefix("");
         authoritiesConverter.setAuthoritiesClaimName("permissions");
         return authoritiesConverter;
-    }
-
-    private String[] getProtectedEndpoints() {
-        return addApiPrefix(appProperties.getProtectedEndpoints());
-    }
-
-    private String[] addApiPrefix(String[] endpointUrls) {
-        return Arrays.stream(endpointUrls)
-                .map(url -> appProperties.getApiPrefix() + url)
-                .toArray(String[]::new);
     }
 }

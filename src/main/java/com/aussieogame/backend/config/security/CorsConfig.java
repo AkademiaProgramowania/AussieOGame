@@ -1,5 +1,6 @@
-package com.aussieogame.backend.config;
+package com.aussieogame.backend.config.security;
 
+import com.aussieogame.backend.config.AppProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

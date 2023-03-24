@@ -1,4 +1,4 @@
-package com.aussieogame.backend.config;
+package com.aussieogame.backend.config.security;
 
 import com.aussieogame.backend.dto.ApiErrorResponse;
 import org.springframework.http.HttpStatus;

@@ -16,11 +16,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends Basic {
-//    private String displayName; //"username" is semi-reserved by Spring Security to mean a unique Principal id
-//    private String password; //stored by an external provider
-//    private String email; //stored by an external provider
-//    @Column(unique = true)
-//    private String username; //used in Spring Security
+    //"username" is semi-reserved by Spring Security to mean a unique Principal id
+    private String displayName;
+    @Column(unique = true)
+    private String username; //used in Spring Security
     private Long points;
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
@@ -29,6 +28,5 @@ public class User extends Basic {
     @Enumerated(EnumType.STRING)
     private Race race;
 
-    @OneToOne(mappedBy = "user")
-    private Registration registration;
+
 }
