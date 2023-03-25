@@ -1,7 +1,10 @@
 package com.aussieogame.backend.config.security;
 
-import com.aussieogame.backend.dto.ApiErrorResponse;
+import com.aussieogame.backend.dto.api.ApiResponse;
+import com.aussieogame.backend.dto.api.mapper.SimpleResponseFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -9,36 +12,36 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @RestControllerAdvice
+@RequiredArgsConstructor
 public class WebErrorHandler {
+
+    private final SimpleResponseFactory responseFactory;
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ApiErrorResponse handleNotFound() {
-        return handleException("404 NOT FOUND");
+    public ResponseEntity<ApiResponse> handleNotFound() {
+        return responseFactory.notFound("No handler found for this request.");
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class)
-    public ApiErrorResponse handleForbidden() {
-        return handleException("403 FORBIDDEN");
+    public ResponseEntity<ApiResponse> handleForbidden() {
+        return responseFactory.error("Access denied.", HttpStatus.FORBIDDEN);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Throwable.class)
-    public ApiErrorResponse handleInternalServerError(Exception exception) {
+    public ResponseEntity<ApiResponse> handleInternalServerError(Exception exception) {
         return handleException(exception);
     }
 
-    private ApiErrorResponse handleException(Exception exception) {
+    private ResponseEntity<ApiResponse> handleException(Exception exception) {
         String errorMsg = "500 INTERNAL SERVER ERROR. " +
                 "Exception: " +
                 exception.getClass() +
                 " Message:   " +
                 exception.getMessage();
 
-        return handleException(errorMsg);
-    }
-
-    private ApiErrorResponse handleException(String errorMsg) {
-        return ApiErrorResponse.from(errorMsg);
+        return responseFactory.error(errorMsg, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

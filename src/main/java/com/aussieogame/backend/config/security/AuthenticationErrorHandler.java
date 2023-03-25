@@ -1,6 +1,6 @@
 package com.aussieogame.backend.config.security;
 
-import com.aussieogame.backend.dto.ApiErrorResponse;
+import com.aussieogame.backend.dto.api.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,7 +31,7 @@ public class AuthenticationErrorHandler implements AuthenticationEntryPoint {
     }
 
     private String createResponseBody() throws IOException {
-        ApiErrorResponse requiresAuthenticationResponse = ApiErrorResponse.from("REQUIRES AUTHENTICATION");
+        ErrorResponse requiresAuthenticationResponse = ErrorResponse.from("REQUIRES AUTHENTICATION");
 
         return objectToJsonMapper.writeValueAsString(requiresAuthenticationResponse);
     }

@@ -1,17 +1,17 @@
 package com.aussieogame.backend.service;
 
-import com.aussieogame.backend.dto.ApiErrorResponse;
-import com.aussieogame.backend.dto.ApiOkResponse;
-import com.aussieogame.backend.dto.ApiResponse;
+import com.aussieogame.backend.dto.api.ApiOkResponse;
 import com.aussieogame.backend.model.dao.enumeration.Race;
 import com.aussieogame.backend.model.dao.impl.Town;
 import com.aussieogame.backend.model.dao.impl.User;
 import com.aussieogame.backend.repo.TownRepository;
 import com.aussieogame.backend.repo.UserRepository;
+import com.aussieogame.backend.service.exception.RegistrationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -24,46 +24,45 @@ public class GameApiService {
     private final TownRepository townRepo;
     private final UserRepository userRepo;
 
-    public ApiOkResponse getProtectedResource() {
-        String somethingProtected = "this is available to authenticated users";
-
-        return ApiOkResponse.from(somethingProtected);
-    }
-
-    public ApiOkResponse getPublicResource() {
-        String somethingPublic = "this is available to everyone";
-
-        return ApiOkResponse.from(somethingPublic);
-    }
-
     public ApiOkResponse getTowns(JwtAuthenticationToken principal) {
         List<Town> towns = townRepo.findAllByUserUsername(principal.getName());
 
-        String response = towns.stream()
-                .map(Town::toString)
-                .collect(Collectors.joining("  ---  "));
-        return ApiOkResponse.from(response);
+        String responseText = prepareResponseTextFrom(towns);
+
+        // TODO fix this once we have DTOs (use Optionals and the ResponseEntity<ApiResponse> up the chain)
+        return ApiOkResponse.from(responseText);
     }
 
-    public ApiResponse getDisplayName(JwtAuthenticationToken principal) {
+    public Optional<String> getDisplayName(JwtAuthenticationToken principal) {
         Optional<User> registration = userRepo.findByUsername(principal.getName());
-        if (registration.isPresent()) {
-            String displayName = registration.get().getDisplayName();
-            return ApiOkResponse.from(displayName);
-        }
-        return new ApiErrorResponse("Registration not found");
+        return registration.map(User::getDisplayName);
     }
 
-    public ApiResponse assignNameToUser(String newDisplayName, JwtAuthenticationToken principal) {
+    public User assignRegistrationToUser(String newDisplayName,
+                                         JwtAuthenticationToken principal
+    ) throws RegistrationException {
         String principalName = principal.getName();
+
+        failIfAlreadyRegistered(principalName);
+
+        User newRegistration = createNewUser(newDisplayName, principalName);
+
+        return userRepo.save(newRegistration);
+    }
+
+    private String prepareResponseTextFrom(Collection<Town> towns) {
+        return towns.stream()
+                .map(Town::toString)
+                .collect(Collectors.joining(" --- "));
+    }
+
+    private void failIfAlreadyRegistered(String principalName) throws RegistrationException {
         if (userRepo.existsByUsername(principalName)) {
-            return new ApiErrorResponse("Registration already exists");
+            throw new RegistrationException("Registration already exists.");
         }
+    }
 
-        User newRegistration
-                = new User(newDisplayName, principalName, 0L, new HashSet<>(), Race.PLATYPUS);
-
-        userRepo.save(newRegistration);
-        return new ApiOkResponse("Created.");
+    private User createNewUser(String displayName, String username) {
+        return new User(displayName, username, 0L, new HashSet<>(), Race.PLATYPUS);
     }
 }

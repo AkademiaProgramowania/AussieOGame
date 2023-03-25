@@ -1,6 +1,6 @@
 package com.aussieogame.backend.controller;
 
-import com.aussieogame.backend.dto.ApiOkResponse;
+import com.aussieogame.backend.dto.api.ApiOkResponse;
 import com.aussieogame.backend.service.GameApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -15,16 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameApiController {
 
     private final GameApiService api;
-
-    @GetMapping("/protected")
-    public ApiOkResponse getProtected() {
-        return api.getProtectedResource();
-    }
-
-    @GetMapping("/public")
-    public ApiOkResponse getPublic() {
-        return api.getPublicResource();
-    }
 
     @GetMapping("/towns")
     public ApiOkResponse getTowns(JwtAuthenticationToken principal) {
