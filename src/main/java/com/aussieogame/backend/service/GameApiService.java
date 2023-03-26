@@ -47,6 +47,7 @@ public class GameApiService {
 
         User newRegistration = createNewUser(newDisplayName, principalName);
 
+        // TODO handle actual DB exceptions
         return userRepo.save(newRegistration);
     }
 

@@ -15,6 +15,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="`user`") //user is a reserved keyword in some SQL dialects
 public class User extends Basic {
     //"username" is semi-reserved by Spring Security to mean a unique Principal id
     private String displayName;

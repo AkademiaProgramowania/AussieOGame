@@ -1,9 +1,7 @@
 package com.aussieogame.backend.model.dao.impl;
 
 import com.aussieogame.backend.model.dao.Basic;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
