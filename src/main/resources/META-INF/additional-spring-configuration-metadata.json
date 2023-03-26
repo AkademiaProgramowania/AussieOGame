@@ -9,5 +9,16 @@
       "name": "application.client-origin-url",
       "type": "java.lang.String",
       "description": "Allowed CORS origin used by the client."
+    },
+    {
+      "name": "application.api-prefix",
+      "type": "java.lang.String",
+      "description": "Current API version prefix."
+    },
+    {
+      "name": "application.protected-endpoints",
+      "type": "java.lang.String",
+      "description": "Description for application.protected-endpoints."
     }
-  ] }
+  ]
+}

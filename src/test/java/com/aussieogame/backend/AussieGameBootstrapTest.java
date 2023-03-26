@@ -9,11 +9,11 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-@ActiveProfiles(profiles = "dev")
-class AussieGameIntegrationTest {
+@ActiveProfiles(profiles = "test")
+class AussieGameBootstrapTest {
 
 	@Test
-	@DisplayName("Integration: application loads properly.")
+	@DisplayName("Full application context loads properly")
 	void contextLoads(ApplicationContext context) {
 		assertNotNull(context);
 	}

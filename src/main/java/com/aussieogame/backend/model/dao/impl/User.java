@@ -15,10 +15,10 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="`user`") //user is a reserved keyword in some SQL dialects
 public class User extends Basic {
-    private String displayName; //"username" is semi-reserved by Spring Security to mean a unique Principal id
-//    private String password; //stored by an external provider
-//    private String email; //stored by an external provider
+    //"username" is semi-reserved by Spring Security to mean a unique Principal id
+    private String displayName;
     @Column(unique = true)
     private String username; //used in Spring Security
     private Long points;
@@ -28,4 +28,6 @@ public class User extends Basic {
     private Set<Town> towns;
     @Enumerated(EnumType.STRING)
     private Race race;
+
+
 }

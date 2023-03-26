@@ -34,4 +34,4 @@ build/
 
 
 ### Local Dev Environment Settings ###
-/src/main/resources/application-dev.yml
+**/application-dev.yml

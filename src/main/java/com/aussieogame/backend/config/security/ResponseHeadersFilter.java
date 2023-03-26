@@ -1,4 +1,4 @@
-package com.aussieogame.backend.config;
+package com.aussieogame.backend.config.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,7 +29,7 @@ public class ResponseHeadersFilter implements Filter {
 
     private HttpServletResponse castToHttpResponse(ServletResponse response) throws IOException {
         if (isNotHttpResponse(response)) {
-            throw new IOException("Unsupported Servlet Response class");
+            throw new IOException("Unsupported Servlet Response class: " + response.getClass().getName());
         }
         return (HttpServletResponse) response;
     }
