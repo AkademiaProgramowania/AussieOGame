@@ -35,4 +35,3 @@ build/
 
 ### Local Dev Environment Settings ###
 **/application-dev.yml
-**/application-test.yml
