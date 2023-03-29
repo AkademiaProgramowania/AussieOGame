@@ -3,6 +3,7 @@ package com.aussieogame.backend.model.dao.impl;
 import com.aussieogame.backend.model.dao.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -23,4 +24,6 @@ public class Building extends Basic {
     private String description;
     @ManyToOne
     private Town town;
+    @OneToOne
+    private Resources resources;
 }

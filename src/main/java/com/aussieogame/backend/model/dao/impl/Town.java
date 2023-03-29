@@ -23,9 +23,9 @@ public class Town extends Basic {
     private Region region;
     @ManyToOne
     private User user;
-    @ManyToOne
+    @OneToOne
     private Resources resources;
-    @OneToMany(mappedBy = "town")
+    @OneToMany(mappedBy = "town", fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Building> buildings;

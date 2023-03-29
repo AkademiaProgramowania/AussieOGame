@@ -22,12 +22,10 @@ public class User extends Basic {
     @Column(unique = true)
     private String username; //used in Spring Security
     private Long points;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Town> towns;
     @Enumerated(EnumType.STRING)
     private Race race;
-
-
 }
