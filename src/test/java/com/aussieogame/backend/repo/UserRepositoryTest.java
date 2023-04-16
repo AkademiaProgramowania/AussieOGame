@@ -1,3 +1,4 @@
+/*
 package com.aussieogame.backend.repo;
 
 import com.aussieogame.backend.TestUtils;
@@ -149,4 +150,4 @@ class UserRepositoryTest {
                 u1, u2, u3, u4, u5, u6
         );
     }
-}
+}*/

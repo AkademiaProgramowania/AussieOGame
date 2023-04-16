@@ -1,7 +1,7 @@
-package com.aussieogame.backend.dto.api.mapper;
+package com.aussieogame.backend.model.dto.api.mapper;
 
-import com.aussieogame.backend.dto.api.ApiResponse;
-import com.aussieogame.backend.dto.api.SimpleStringReponse;
+import com.aussieogame.backend.model.dto.api.ApiResponse;
+import com.aussieogame.backend.model.dto.api.SimpleStringReponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.aussieogame.backend.config.security;
 
-import com.aussieogame.backend.dto.api.ApiResponse;
-import com.aussieogame.backend.dto.api.mapper.SimpleResponseFactory;
+import com.aussieogame.backend.model.dto.api.ApiResponse;
+import com.aussieogame.backend.model.dto.api.mapper.SimpleResponseFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

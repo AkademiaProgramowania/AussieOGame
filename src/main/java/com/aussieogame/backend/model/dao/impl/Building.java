@@ -7,6 +7,8 @@ import jakarta.persistence.OneToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
 @Entity
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
@@ -16,7 +18,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Building extends Basic {
-    private Long id;
     private String name;
     private int level;
     @ManyToOne
@@ -26,4 +27,7 @@ public class Building extends Basic {
     private Town town;
     @OneToOne
     private Resources resources;
+    private Boolean isFinished;
+    private LocalDateTime start;
+    private LocalDateTime end;
 }

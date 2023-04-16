@@ -1,6 +1,6 @@
 package com.aussieogame.backend.config.security;
 
-import com.aussieogame.backend.dto.api.ErrorResponse;
+import com.aussieogame.backend.model.dto.api.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

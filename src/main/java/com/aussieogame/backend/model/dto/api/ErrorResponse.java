@@ -1,4 +1,4 @@
-package com.aussieogame.backend.dto.api;
+package com.aussieogame.backend.model.dto.api;
 
 
 public record ErrorResponse(String error) implements ApiResponse {

@@ -1,4 +1,4 @@
-package com.aussieogame.backend.dto.api;
+package com.aussieogame.backend.model.dto.api;
 
 import lombok.Value;
 import org.springframework.lang.NonNull;
