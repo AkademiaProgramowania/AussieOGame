@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface TownRepository extends JpaRepository<Town, Long> {
-    List<Town> findAllByUsername(String username);
+    List<Town> findAllByUserUsername(String username);
 
     List<Town> findByUserIdAndBuildingsIsFinishedIsFalse(Long userId);
 }

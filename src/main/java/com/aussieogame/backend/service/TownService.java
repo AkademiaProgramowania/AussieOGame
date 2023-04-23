@@ -18,6 +18,6 @@ public class TownService {
     }
 
     public List<Town> getTowns(String username) {
-        return townRepository.findAllByUsername(username);
+        return townRepository.findAllByUserUsername(username);
     }
 }
