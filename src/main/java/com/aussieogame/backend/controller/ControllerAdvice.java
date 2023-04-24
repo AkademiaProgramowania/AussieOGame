@@ -1,5 +1,6 @@
 package com.aussieogame.backend.controller;
 
+import com.aussieogame.backend.exception.ResourceNotFoundException;
 import com.aussieogame.backend.model.dto.ErrorDTO;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -26,5 +27,12 @@ public class ControllerAdvice {
     public ErrorDTO handleEntityNotFoundException(EntityNotFoundException e) {
         log.warn(e.getMessage());
         return new ErrorDTO("Data couldn't be found");
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleResourceNotFound(ResourceNotFoundException e) {
+        log.warn(e.getMessage());
+        return new ErrorDTO(e.getMessage());
     }
 }

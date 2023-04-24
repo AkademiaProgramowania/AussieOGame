@@ -1,32 +1,64 @@
 package com.aussieogame.backend.controller;
 
-import com.aussieogame.backend.mapper.TownMapper;
+import com.aussieogame.backend.model.dto.StartNewBuildingDTO;
 import com.aussieogame.backend.model.dto.TownDTO;
 import com.aussieogame.backend.service.TownService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v2/town")
+@RequestMapping("${application.api-prefix}/towns")
 @RequiredArgsConstructor
 public class TownController {
     private final TownService townService;
-    private final TownMapper townMapper;
 
     /**
-     * @return list of towns owned by the user. In the towns there are only buildings that are currently still being built.
-     * */
-    @GetMapping("/{userId}")
-    public List<TownDTO> getOverview(@PathVariable Long userId) {
-        return townMapper.toDtos(townService.getOverview(userId));
+     * Retrieves all towns owned by the currently authenticated user, with their full building list (including active
+     * production).
+     * @param principal Authentication principal (JWT).
+     */
+    @GetMapping
+    public ResponseEntity<List<TownDTO>> getTowns(JwtAuthenticationToken principal) {
+        List<TownDTO> townDTOs = townService.getTowns(principal.getName());
+
+        return ResponseEntity.ok(townDTOs);
     }
 
-    // w sumie to request param nie zadziala jak to jest jakas magiczna zmienna
-    @GetMapping
-    public List<TownDTO> getTowns( JwtAuthenticationToken principal) {
-        return townMapper.toDtos(townService.getTowns(principal.getName()));
+    @GetMapping("/{townId}")
+    public ResponseEntity<TownDTO> getTownById(JwtAuthenticationToken principal,
+                                               @PathVariable long townId) {
+        TownDTO townDTO = townService.getById(principal.getName(), townId);
+
+        return ResponseEntity.ok(townDTO);
+    }
+
+    @PostMapping("/{townId}/queue")
+    public ResponseEntity<TownDTO> postNewBuilding(JwtAuthenticationToken principal,
+                                                   @PathVariable long townId,
+                                                   @RequestBody StartNewBuildingDTO building) {
+        TownDTO townDTO = townService.enqueueNewBuilding(principal.getName(), townId, building);
+        URI newTownURI = getNewTownURI(townDTO.getId());
+
+        return createResponse(townDTO, newTownURI);
+    }
+
+    private URI getNewTownURI(long id) {
+        return ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUri();
+    }
+
+    private ResponseEntity<TownDTO> createResponse(TownDTO createdTown, URI entityLocation) {
+        return ResponseEntity
+                .created(entityLocation)
+                .body(createdTown);
     }
 }

@@ -2,8 +2,6 @@ package com.aussieogame.backend.model.dao.impl;
 
 import com.aussieogame.backend.model.dao.Basic;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -17,9 +15,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 // maybe change for settlement
 public class Resources extends Basic {
-    private Long dollars;
-    private Long eucalyptus;
-    @ManyToOne
-    @JoinColumn(name = "town_id")
-    private Town town;
+    private Long dollars = 0L;
+    private Long eucalyptus = 0L;
 }

@@ -3,6 +3,7 @@ package com.aussieogame.backend.model.dao.impl;
 import com.aussieogame.backend.model.dao.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -19,8 +20,8 @@ import java.time.LocalDateTime;
 public class Expedition extends Basic {
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
-    @ManyToOne
-    private Resources cargo;
+    @OneToOne
+    private Resources cargo = new Resources();
     @ManyToOne
     private Army army;
     @ManyToOne

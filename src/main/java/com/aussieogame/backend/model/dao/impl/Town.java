@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @SuperBuilder
@@ -24,9 +25,19 @@ public class Town extends Basic {
     @ManyToOne
     private User user;
     @OneToOne
-    private Resources resources;
-    @OneToMany(mappedBy = "town", fetch = FetchType.LAZY)
+    private Resources resources = new Resources();
+    @OneToMany(mappedBy = "town", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Building> buildings;
+    private Set<Building> buildings = new HashSet<>();
+
+    @OneToMany(mappedBy = "town", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Building> constructionQueue = new HashSet<>();
+
+    public void addToConstructionQueue(Building building) {
+        building.setTown(this);
+        constructionQueue.add(building);
+    }
 }

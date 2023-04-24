@@ -19,15 +19,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Building extends Basic {
     private String name;
-    private int level;
-    @ManyToOne
-    private Resources constructionCost;
+    private Integer level;
     private String description;
     @ManyToOne
     private Town town;
     @OneToOne
-    private Resources resources;
+    private Resources constructionCost;
     private Boolean isFinished;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime constructionStart;
+    private LocalDateTime constructionEnd;
 }

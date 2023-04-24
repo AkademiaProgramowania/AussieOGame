@@ -7,5 +7,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BuildingRepository extends JpaRepository<Building, Long> {
-    List<Building> findByIsFinishedIsFalseAndEndIsGreaterThanEqual(LocalDateTime now);
+    List<Building> findByIsFinishedIsFalseAndConstructionEndIsGreaterThanEqual(LocalDateTime now);
 }

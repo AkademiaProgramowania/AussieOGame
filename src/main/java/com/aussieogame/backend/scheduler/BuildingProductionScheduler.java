@@ -17,7 +17,7 @@ public class BuildingProductionScheduler {
 
     @Scheduled(cron = "0 * * * * *") // Runs every minute
     public void updateBuildingIsFinished() {
-        buildingRepository.findByIsFinishedIsFalseAndEndIsGreaterThanEqual(LocalDateTime.now())
+        buildingRepository.findByIsFinishedIsFalseAndConstructionEndIsGreaterThanEqual(LocalDateTime.now())
                 .stream()
                 .peek(building -> building.setIsFinished(true))
                 .forEach(buildingRepository::save);

@@ -20,7 +20,6 @@ public class UserController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    // teraz jest JwtAuthenticationToken defaultowo w @RequestParam a w postcie w sumie powinno byc to w body czyli jedno dto zawierajace te wartosci.
     public UserDTO register(@RequestParam("name") String displayName, JwtAuthenticationToken principal) {
         return userMapper.toDto((userService.register(displayName, principal)));
     }

@@ -2,6 +2,7 @@ package com.aussieogame.backend.mapper;
 
 import com.aussieogame.backend.model.dao.impl.Building;
 import com.aussieogame.backend.model.dto.BuildingDTO;
+import com.aussieogame.backend.model.dto.StartNewBuildingDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
