@@ -1,6 +1,6 @@
 package com.aussieogame.backend.model.dao.impl;
 
-import com.aussieogame.backend.model.dao.Basic;
+import com.aussieogame.backend.model.dao.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -13,8 +13,9 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-// maybe change for settlement
-public class Resources extends Basic {
+public class Resources extends BaseEntity {
+    @Builder.Default
     private Long dollars = 0L;
+    @Builder.Default
     private Long eucalyptus = 0L;
 }

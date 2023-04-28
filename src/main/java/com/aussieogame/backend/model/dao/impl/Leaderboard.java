@@ -1,6 +1,6 @@
 package com.aussieogame.backend.model.dao.impl;
 
-import com.aussieogame.backend.model.dao.Basic;
+import com.aussieogame.backend.model.dao.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Leaderboard extends Basic {
+public class Leaderboard extends BaseEntity {
     private Long id;
     private Long userId;
     private Long raceId;

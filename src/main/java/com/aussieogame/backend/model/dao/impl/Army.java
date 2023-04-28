@@ -1,6 +1,6 @@
 package com.aussieogame.backend.model.dao.impl;
 
-import com.aussieogame.backend.model.dao.Basic;
+import com.aussieogame.backend.model.dao.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Army extends Basic {
+public class Army extends BaseEntity {
     private String name;
     private int totalUnitCount;
     private Long cargoCapacity;

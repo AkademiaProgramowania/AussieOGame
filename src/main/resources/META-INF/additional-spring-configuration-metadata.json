@@ -18,7 +18,17 @@
     {
       "name": "application.protected-endpoints",
       "type": "java.lang.String",
-      "description": "Description for application.protected-endpoints."
+      "description": "List of API endpoints requiring authentication."
+    },
+    {
+      "name": "application.scheduling.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether scheduled tasks should run. Defaults to TRUE when missing."
+    },
+    {
+      "name": "application.scheduling.poll-building-queue",
+      "type": "java.lang.Long",
+      "description": "Interval at which the DB is polled for recently finished buildings."
     }
   ]
 }

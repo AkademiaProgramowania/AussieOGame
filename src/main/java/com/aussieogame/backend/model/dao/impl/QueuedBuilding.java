@@ -1,10 +1,14 @@
 package com.aussieogame.backend.model.dao.impl;
 
 import com.aussieogame.backend.model.dao.BaseEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDateTime;
 
 @Entity
 @SuperBuilder
@@ -14,11 +18,13 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Building extends BaseEntity {
-    private String name;
-    private Integer level;
-    private String description;
+public class QueuedBuilding extends BaseEntity {
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Building building;
     @ManyToOne
     private Town town;
-
+    @OneToOne
+    private Resources constructionCost;
+    private LocalDateTime constructionStart;
+    private LocalDateTime constructionEnd;
 }

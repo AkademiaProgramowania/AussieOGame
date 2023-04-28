@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
-@Slf4j
 @RestControllerAdvice
+@Slf4j
 public class ControllerAdvice {
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
@@ -36,3 +36,4 @@ public class ControllerAdvice {
         return new ErrorDTO(e.getMessage());
     }
 }
+

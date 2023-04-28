@@ -14,7 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityFilterConfig {
     private final AuthenticationErrorHandler authenticationErrorHandler;
-
     private final WithAudienceJwtDecoderFactory jwtDecoderFactory;
     private final AuthenticationConverterFactory authenticationConverterFactory;
 

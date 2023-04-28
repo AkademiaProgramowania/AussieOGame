@@ -1,6 +1,6 @@
 package com.aussieogame.backend.model.dao.impl;
 
-import com.aussieogame.backend.model.dao.Basic;
+import com.aussieogame.backend.model.dao.BaseEntity;
 import com.aussieogame.backend.model.dao.enumeration.Race;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="`user`", indexes = @Index(name = "idx_username", columnList = "username", unique = true)) //user is a reserved keyword in some SQL dialects
-public class User extends Basic {
+public class User extends BaseEntity {
     //"username" is semi-reserved by Spring Security to mean a unique Principal id
     private String displayName;
     @Column(unique = true)

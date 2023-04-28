@@ -1,7 +1,7 @@
 /*
 package com.aussieogame.backend.repo;
 
-import com.aussieogame.backend.TestUtils;
+import com.aussieogame.backend.utils.TestFactoryUtils;
 import com.aussieogame.backend.model.dao.impl.User;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Disabled;
@@ -38,7 +38,7 @@ class UserRepositoryTest {
 
     @Test
     @DisplayName("Can find by username")
-    @Sql({"classpath:sql/users.sql"})
+    @Sql({"classpath:sql/users-init.sql"})
     void givenExistingUser_canFindByUsername() {
         //given
         //in DB: ('Discord User', 1000, 'PLATYPUS', 'discord:oauth2');
@@ -55,7 +55,7 @@ class UserRepositoryTest {
 
     @Test
     @DisplayName("Will not find nonexistent username")
-    @Sql({"classpath:sql/users.sql"})
+    @Sql({"classpath:sql/users-init.sql"})
     void givenNonexistentUser_willNotFindByUsername() {
         //given
         final String username = "not-in-db";
@@ -103,8 +103,8 @@ class UserRepositoryTest {
     @DisplayName("Given duplicate username when persisting then throws")
     void givenDuplicateUsername_throws() {
         //given
-        User existing = TestUtils.createUser("same@username");
-        User duplicate = TestUtils.createUser("same@username");
+        User existing = TestFactoryUtils.createUser("same@username");
+        User duplicate = TestFactoryUtils.createUser("same@username");
         repo.save(existing); //this should pass
 
         //when
@@ -129,22 +129,22 @@ class UserRepositoryTest {
     }
 
     private static Stream<User> supplyValidUsers() {
-        return Stream.generate(() -> TestUtils.createUser(
+        return Stream.generate(() -> TestFactoryUtils.createUser(
                         faker.letterify("????@email.com")
                 )
         ).limit(3);
     }
 
     private static List<User> supplyInvalidUsers() {
-        User u1 = TestUtils.createUser("nullDisplayName");
+        User u1 = TestFactoryUtils.createUser("nullDisplayName");
         u1.setDisplayName(null);
-        User u2 = TestUtils.createUser("emptyDisplayName");
+        User u2 = TestFactoryUtils.createUser("emptyDisplayName");
         u2.setDisplayName("");
-        User u3 = TestUtils.createUser("blankDisplayName");
+        User u3 = TestFactoryUtils.createUser("blankDisplayName");
         u3.setDisplayName("\n\t");
-        User u4 = TestUtils.createUser(null);
-        User u5 = TestUtils.createUser("");
-        User u6 = TestUtils.createUser("\n\t");
+        User u4 = TestFactoryUtils.createUser(null);
+        User u5 = TestFactoryUtils.createUser("");
+        User u6 = TestFactoryUtils.createUser("\n\t");
 
         return List.of(
                 u1, u2, u3, u4, u5, u6

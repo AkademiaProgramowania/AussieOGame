@@ -16,3 +16,6 @@ application:
     - "/protected"
     - "/user"
     - "/towns"
+  scheduling:
+    enabled: true
+    poll-building-queue: 2000

@@ -1,4 +1,4 @@
-package com.aussieogame.backend;
+package com.aussieogame.backend.utils;
 
 import com.aussieogame.backend.model.dao.enumeration.Race;
 import com.aussieogame.backend.model.dao.impl.User;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 
 @Service
-public class TestUtils {
+public class TestFactoryUtils {
     private static final Faker faker = new Faker();
 
     public static User createUser(String username) {

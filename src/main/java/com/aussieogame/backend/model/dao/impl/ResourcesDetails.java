@@ -1,6 +1,6 @@
 package com.aussieogame.backend.model.dao.impl;
 
-import com.aussieogame.backend.model.dao.Basic;
+import com.aussieogame.backend.model.dao.BaseEntity;
 import com.aussieogame.backend.model.dao.enumeration.OperationType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 // maybe change for settlement
-public class ResourcesDetails extends Basic {
+public class ResourcesDetails extends BaseEntity {
     // typ operacji np add, minus
     @Enumerated(EnumType.STRING)
     private OperationType operationType;
