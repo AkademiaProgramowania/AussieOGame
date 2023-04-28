@@ -22,7 +22,7 @@ class QueuedBuildingRepositoryTest {
     @Autowired
     private QueuedBuildingRepository underTest;
     @Test
-    @DisplayName("findByConstructionEndBefore should only return items finishing before given datetime")
+    @DisplayName("findByConstructionEndBefore() should only return items finishing before given datetime")
     @Sql(value = "classpath:sql/queued-buildings-init.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
     void whenFindByConstructionEndBefore_thenFindsCorrect() {
         //given
@@ -41,7 +41,7 @@ class QueuedBuildingRepositoryTest {
     }
 
     @Test
-    @DisplayName("findByConstructionEndBefore should return a non-null empty set if no items are finishing")
+    @DisplayName("findByConstructionEndBefore() should return a non-null empty set if no items are finishing")
     void whenFindByConstructionEndBefore_thenFindsNothing() {
         //given
         LocalDateTime givenDatetime = LocalDateTime.of(2000, 1, 1, 11, 11, 11);
