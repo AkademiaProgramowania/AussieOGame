@@ -1,5 +1,6 @@
 package com.aussieogame.backend.controller;
 
+import com.aussieogame.backend.exception.RequestedActionNotAllowedException;
 import com.aussieogame.backend.exception.ResourceNotFoundException;
 import com.aussieogame.backend.model.dto.ErrorDTO;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,7 +19,7 @@ public class ControllerAdvice {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorDTO handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e) {
-        log.warn(e.getMessage());
+        log.error(e.getMessage());
         return new ErrorDTO("Entity already exists");
     }
 
@@ -32,6 +33,13 @@ public class ControllerAdvice {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDTO handleResourceNotFound(ResourceNotFoundException e) {
+        log.warn(e.getMessage());
+        return new ErrorDTO(e.getMessage());
+    }
+
+    @ExceptionHandler(RequestedActionNotAllowedException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorDTO handleRequestedActionNotAllowedException(RequestedActionNotAllowedException e) {
         log.warn(e.getMessage());
         return new ErrorDTO(e.getMessage());
     }

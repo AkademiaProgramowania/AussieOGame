@@ -8,11 +8,14 @@ import com.aussieogame.backend.model.dao.impl.QueuedBuilding;
 import com.aussieogame.backend.model.dao.impl.Resources;
 import com.aussieogame.backend.model.dao.impl.Town;
 import com.aussieogame.backend.model.dto.QueuedBuildingDTO;
+import com.aussieogame.backend.model.dto.ResourcesDTO;
 import com.aussieogame.backend.model.dto.StartNewBuildingDTO;
 import com.aussieogame.backend.model.dto.TownDTO;
 import com.aussieogame.backend.repo.TownRepository;
+import com.aussieogame.backend.service.utils.ConstructionAvailabilityValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -23,7 +26,10 @@ import java.util.Optional;
 public class QueuedBuildingService {
     private final TownRepository townRepo;
     private final QueuedBuildingMapper mapper;
+    private final ConstructionAvailabilityValidator constructionValidator;
     private final Clock clock;
+
+    @Transactional
     public QueuedBuildingDTO enqueueNewBuilding(
             String username,
             long townId,
@@ -55,4 +61,36 @@ public class QueuedBuildingService {
 
         return Optional.of(newQueuedEntity);
     }
+
+    private QueuedBuilding addToQueueIfAllowedOrElseThrow(Town town, StartNewBuildingDTO requestData) {
+        constructionValidator.checkIfAllowedOrElseThrow(town, requestData);
+        ResourcesDTO constructionCost = findConstructionCost(town, requestData);
+        subtractFundsIfSufficientOrElseThrow(town, constructionCost);
+        Building newBuildingEntity = createBuilding(requestData);
+        QueuedBuilding newQueuedEntity = createQueuedBuilding(town, newBuildingEntity);
+        saveTownWithUpdatedQueue(town, newQueuedEntity);
+
+        return newQueuedEntity;
+    }
+
+    private void saveTownWithUpdatedQueue(Town town, QueuedBuilding newQueuedEntity) {
+    }
+
+    private QueuedBuilding createQueuedBuilding(Town town, Building newBuildingEntity) {
+        throw new UnsupportedOperationException();
+
+    }
+
+    private Building createBuilding(StartNewBuildingDTO requestData) {
+        throw new UnsupportedOperationException();
+
+    }
+
+    private void subtractFundsIfSufficientOrElseThrow(Town town, ResourcesDTO constructionCost) {
+    }
+
+    private ResourcesDTO findConstructionCost(Town town, StartNewBuildingDTO requestData) {
+        throw new UnsupportedOperationException();
+    }
+
 }
